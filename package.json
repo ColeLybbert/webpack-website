@@ -17,7 +17,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "webpack"
+    "build-prod": "webpack --config webpack.prod.js",
+    "build-dev": "webpack-dev-server  --config webpack.dev.js --open"
   },
   "repository": {
     "type": "git",
@@ -30,5 +31,10 @@
     "url": "https://github.com/ColeLybbert/webpack-website/issues"
   },
   "homepage": "https://github.com/ColeLybbert/webpack-website#readme",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "mini-css-extract-plugin": "^2.6.1",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "terser-webpack-plugin": "^4.2.3"
+  }
 }

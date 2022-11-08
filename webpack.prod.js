@@ -1,6 +1,7 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { plugins } = require('@babel/preset-env/lib/plugins-compat-data')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
     mode: 'development',
@@ -14,7 +15,7 @@ module.exports = {
         {
             test:/\.scss$/,
             use: [
-                'style-loader', 'css-loader', 'sass-loader',
+                MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader',
             ]
         },
         {
@@ -22,9 +23,6 @@ module.exports = {
             exclude: /node_modules/,
             use: {
                 loader: 'babel-loader',
-                options: {
-                    presets: ['@babel/preset-env']
-                }
             }
         }
         ]
@@ -35,5 +33,6 @@ module.exports = {
             filename: 'index.html',
             template: 'src/template.html',
         }),
+        new MiniCssExtractPlugin({filename: '[name].css'})
     ],
 }
