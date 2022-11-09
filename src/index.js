@@ -1,6 +1,6 @@
 import { checkForName } from "./js/nameChecker";
 import { handleSubmit } from "./js/formHandler";
-import { cloudData } from "./server/api";
+import { apiFunction } from "./js/api";
 
 import "./styles/base.scss";
 import "./styles/footer.scss";
@@ -11,6 +11,7 @@ import "./styles/resets.scss";
 export {
   checkForName,
   handleSubmit,
-  cloudData
 }
+
+apiFunction()
 
