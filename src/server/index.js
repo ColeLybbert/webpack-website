@@ -1,9 +1,10 @@
 var path = require('path')
 const express = require('express')
-
+const cors = require('cors')
 const app = express();
 
 app.use(express.static('dist'))
+app.use(cors())
 
 console.log(__dirname)
 

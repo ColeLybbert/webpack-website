@@ -19,7 +19,7 @@ const apiKey = "1d319e9eef10d4332f9a12cd948d7890";
 const baseURL = "https://api.meaningcloud.com/sentiment-2.1";
 
 let apiData;
-let projectData = { apiData };
+let projectData = { agreement: "", confidence: "", irony: "" };
 
 const sumbitForm = async (e) => {
   await cloudData();
@@ -47,7 +47,9 @@ const cloudData = async () => {
     // Messing with data
     const data = await res.json();
     apiData = data;
-    projectData.data = apiData;
+    projectData.agreement = apiData.agreement;
+    projectData.confidence = apiData.confidence;
+    projectData.irony = apiData.irony;
     console.log(apiData)
     return apiData;
   } catch (err) {
@@ -59,7 +61,7 @@ const postData = async () => {
   fetch("http://localhost:8000/lang", {
     method: "POST",
     headers: { "Content-Type": "application/json"},
-    body: JSON.stringify({projectData}),
+    body: JSON.stringify({ projectData }),
     })
     .then((response) => response.json())
 };
