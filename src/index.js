@@ -47,11 +47,15 @@ const cloudData = async () => {
     // Messing with data
     const data = await res.json();
     apiData = data;
-    projectData.agreement = apiData.agreement;
-    projectData.confidence = apiData.confidence;
-    projectData.irony = apiData.irony;
-    console.log(apiData)
-    return apiData;
+    if (apiData) {
+      projectData.agreement = apiData.agreement;
+      projectData.confidence = apiData.confidence;
+      projectData.irony = apiData.irony;
+      console.log(apiData)
+      return apiData;
+    } else {
+      console.log("this code doesnt exist bro");
+    }
   } catch (err) {
     return `Failed ${err}`;
   }
