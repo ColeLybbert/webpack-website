@@ -7,7 +7,7 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
-  mode: "production",
+  mode: "develop",
   entry: path.resolve(__dirname, "src/index.js"),
   output: {
     libraryTarget: "var",
@@ -18,6 +18,13 @@ module.exports = {
   },
   module: {
     rules: [
+        {
+          devServer: {
+            hot: true,
+            publicPath: "/",
+            historyApiFallback: true,
+          },
+        },
       {
         test: /\.scss$/,
         use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
@@ -27,13 +34,6 @@ module.exports = {
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
-        },
-      },
-      {
-        devServer: {
-          hot: true,
-          publicPath: "/",
-          historyApiFallback: true,
         },
       },
     ],
