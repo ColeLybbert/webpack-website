@@ -14,19 +14,13 @@ module.exports = {
   output: {
     libraryTarget: "var",
     library: "Client",
+    filename: 'bundle.js',
   },
   optimization: {
     minimizer: [new TerserPlugin({}), new OptimizeCSSAssetsPlugin({})],
   },
   module: {
     rules: [
-        {
-          devServer: {
-            hot: true,
-            publicPath: "/",
-            historyApiFallback: true,
-          },
-        },
       {
         test: /\.scss$/,
         use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
@@ -39,6 +33,10 @@ module.exports = {
         },
       },
     ],
+  },
+  devServer: {
+    static: './dist',
+   hot: true,
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
