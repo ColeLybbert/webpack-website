@@ -1,13 +1,12 @@
 const webpack = require('webpack')
+
 const path = require("path");
-const dotenv = require('dotenv').config( {
-  path: path.join(__dirname, '.env')
-});
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { plugins } = require("@babel/preset-env/lib/plugins-compat-data");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   mode: "development",
@@ -42,14 +41,12 @@ module.exports = {
    hot: true,
   },
   plugins: [
+    new Dotenv(),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       title: "lang-website",
       filename: "index.html",
       template: "src/template.html",
-    }),
-    new webpack.DefinePlugin( {
-      "process.env": dotenv.parsed
     }),
     new MiniCssExtractPlugin({ filename: "[name].css" }),
   ],
