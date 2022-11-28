@@ -1,6 +1,3 @@
-import { checkForName } from "./js/nameChecker";
-import { handleSubmit } from "./js/formHandler";
-
 import "./styles/base.scss";
 import "./styles/footer.scss";
 import "./styles/form.scss";
@@ -12,19 +9,23 @@ export {
   handleSubmit,
 }
 
-let myForm = document.getElementById("inputForm");
 let button = document.getElementById("submitBtn");
 let formInput = document.getElementById("name");
-const apiKey = "1d319e9eef10d4332f9a12cd948d7890";
+const apiKey = process.env.API_KEY;
 const baseURL = "https://api.meaningcloud.com/sentiment-2.1";
+let li1 = document.getElementById("li1")
+let li2 = document.getElementById("li2")
+let li3 = document.getElementById("li3")
 
 let apiData;
 let projectData = { agreement: "", confidence: "", irony: "" };
 
-const sumbitForm = async (e) => {
+const submitForm = async (e) => {
   await cloudData();
 
   postData();
+
+  updateData();
 };
 
 const cloudData = async () => {
@@ -51,7 +52,7 @@ const cloudData = async () => {
       projectData.agreement = apiData.agreement;
       projectData.confidence = apiData.confidence;
       projectData.irony = apiData.irony;
-      console.log(apiData)
+      console.log(apiData);
       return apiData;
     } else {
       console.log("this code doesnt exist bro");
@@ -71,9 +72,52 @@ const postData = async () => {
 };
 
 
+
+const updateData = async () => {
+  try {
+    const res = await fetch(`http://localhost:8000/lang`)
+    const data = await res.json();
+    let agreement = data.projectData.agreement;
+    let confidence = data.projectData.confidence;
+    let irony = data.projectData.irony;
+    
+    li1.innerHTML = agreement;
+    li2.innerHTML = confidence;
+    li3.innerHTML = irony;
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+
+function checkForName(inputText) {
+  console.log("::: Running checkForName :::", inputText);
+  let names = [
+    "Picard",
+    "Janeway",
+    "Kirk",
+    "Archer",
+    "Georgiou"
+  ]
+  
+  if(names.includes(inputText)) {
+    alert("Welcome, Captain!")
+  }
+}
+
+function handleSubmit() {
+  
+  // check what text was put into the form field
+  let formText = document.getElementById('name').value
+  
+  checkForName(formText)
+  
+  console.log("::: Form Submitted :::")
+  
+}
+
 button.addEventListener('click', () => {
-  sumbitForm()
+  handleSubmit();
+  submitForm();
 })
-
-
 

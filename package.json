@@ -6,6 +6,7 @@
     "babel-loader": "^9.0.1",
     "cors": "^2.8.5",
     "css-loader": "^6.7.1",
+    "dotenv": "^16.0.3",
     "sass": "^1.55.0",
     "sass-loader": "^13.1.0",
     "style-loader": "^3.3.1",
@@ -15,10 +16,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server",
-    "start": "node src/server/index.js",
-    "build-prod": "webpack --config webpack.prod.js",
-    "build": "webpack-dev-server --config webpack.dev.js --open"
+    "server": "node src/server/index.js",
+    "dev": "webpack-dev-server --config webpack.dev.js --open"
   },
   "repository": {
     "type": "git",

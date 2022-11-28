@@ -23,7 +23,6 @@ app.get('/lang', (req, res) => {
 //POST request comes in, this handles it
 app.post('/lang', (req, res) => {
     projectData = req.body;
-    console.log(projectData);
 })
 
 
