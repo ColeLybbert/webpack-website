@@ -10,7 +10,6 @@ export {
 let button = document.getElementById("submitBtn");
 let formInput = document.getElementById("name");
 const apiKey = process.env.API_KEY;
-console.log(apiKey)
 const baseURL = "https://api.meaningcloud.com/sentiment-2.1";
 let li1 = document.getElementById("li1")
 let li2 = document.getElementById("li2")
