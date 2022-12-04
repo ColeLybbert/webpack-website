@@ -2,9 +2,19 @@ import "./styles/base.scss";
 import "./styles/footer.scss";
 import "./styles/form.scss";
 import "./styles/header.scss";
-export {
-  checkForName,
-  handleSubmit,
+
+import handleSubmit from './js/handleSubmit'
+import nameChecker from './js/namechecker'
+
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/service-worker.js').then(registration => {
+      console.log('SW registered: ', registration);
+    }).catch(registrationError => {
+      console.log('SW registration failed: ', registrationError);
+    });
+  });
 }
 
 let button = document.getElementById("submitBtn");
@@ -24,6 +34,7 @@ const submitForm = async (e) => {
   postData();
 
   updateData();
+
 };
 
 const cloudData = async () => {
@@ -87,35 +98,8 @@ const updateData = async () => {
   }
 }
 
-
-function checkForName(inputText) {
-  console.log("::: Running checkForName :::", inputText);
-  let names = [
-    "Picard",
-    "Janeway",
-    "Kirk",
-    "Archer",
-    "Georgiou"
-  ]
-  
-  if(names.includes(inputText)) {
-    alert("Welcome, Captain!")
-  }
-}
-
-function handleSubmit() {
-  
-  // check what text was put into the form field
-  let formText = document.getElementById('name').value
-  
-  checkForName(formText)
-  
-  console.log("::: Form Submitted :::")
-  
-}
-
 button.addEventListener('click', () => {
-  handleSubmit();
+  handleSubmit(nameChecker);
   submitForm();
 })
 
