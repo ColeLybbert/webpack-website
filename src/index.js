@@ -6,84 +6,26 @@ import "./styles/header.scss";
 import { submitForm } from './js/submitForm'
 
 let button = document.getElementById("submitBtn");
-let formInput = document.getElementById("name");
+let formInput = document.getElementById("name").value;
 const apiKey = process.env.API_KEY;
 const baseURL = "https://api.meaningcloud.com/sentiment-2.1";
 
 let apiData;
 let projectData = { agreement: "", confidence: "", irony: "" };
 
-const cloudData = async () => {
-  try {
-    let formInputValue = formInput.value;
-
-    // Parameters for the fetch request
-    const formdata = new FormData();
-    formdata.append("key", apiKey);
-    formdata.append("txt", formInputValue);
-    formdata.append("lang", "en");
-
-    // The fetch request
-    const res = await fetch(baseURL, {
-      method: "POST",
-      body: formdata,
-      redirect: "follow",
-    });
-
-    // Messing with data
-    const data = await res.json();
-    apiData = data;
-    if (apiData) {
-      projectData.agreement = apiData.agreement;
-      projectData.confidence = apiData.confidence;
-      projectData.irony = apiData.irony;
-      console.log(apiData);
-      return apiData;
-    } else {
-      console.log("this code doesnt exist bro");
-    }
-  } catch (err) {
-    return `Failed ${err}`;
-  }
-};
-
-const postData = async () => {
-  fetch("http://localhost:8000/lang", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ projectData }),
-  }).then((response) => response.json());
-};
-
-const updateData = async () => {
-  try {
-    const res = await fetch(`http://localhost:8000/lang`);
-    const data = await res.json();
-    let agreement = data.projectData.agreement;
-    let confidence = data.projectData.confidence;
-    let irony = data.projectData.irony;
-
-    li1.innerHTML = agreement;
-    li2.innerHTML = confidence;
-    li3.innerHTML = irony;
-  } catch (err) {
-    console.log(err);
-  }
-};
-
 button.addEventListener("click", () => {
-  handleSubmit();
-  submitForm();
+  // handleSubmit();
+  submitForm(formInput);
 });
+//this is wrong, it doesn't actually handle any form.
+// function handleSubmit() {
+//   // check what text was put into the form field
+//   let formText = document.getElementById("name").value;
 
-function handleSubmit() {
-  // check what text was put into the form field
-  let formText = document.getElementById("name").value;
+//   checkForName(formText);
 
-  checkForName(formText);
-
-  console.log("::: Form Submitted :::");
-}
+//   console.log("::: Form Submitted :::");
+// }
 
 function checkForName(inputText) {
   console.log("::: Running checkForName :::", inputText);
@@ -93,7 +35,3 @@ function checkForName(inputText) {
     alert("Welcome, Captain!");
   }
 }
-
-export { cloudData };
-export { postData } ;
-export { updateData };
