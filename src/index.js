@@ -3,8 +3,7 @@ import "./styles/footer.scss";
 import "./styles/form.scss";
 import "./styles/header.scss";
 
-import { postData } from "./js/post";
-import { updateData } from "./js/update";
+import { submitForm } from './js/submitForm'
 
 let button = document.getElementById("submitBtn");
 let formInput = document.getElementById("name");
@@ -13,15 +12,6 @@ const baseURL = "https://api.meaningcloud.com/sentiment-2.1";
 
 let apiData;
 let projectData = { agreement: "", confidence: "", irony: "" };
-
-const submitForm = async (e) => {
-  await cloudData();
-
-  postData(projectData);
-
-  updateData(projectData);
-
-};
 
 const cloudData = async () => {
   try {
@@ -57,40 +47,53 @@ const cloudData = async () => {
   }
 };
 
+const postData = async () => {
+  fetch("http://localhost:8000/lang", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ projectData }),
+  }).then((response) => response.json());
+};
 
-button.addEventListener('click', () => {
-  submitForm();
+const updateData = async () => {
+  try {
+    const res = await fetch(`http://localhost:8000/lang`);
+    const data = await res.json();
+    let agreement = data.projectData.agreement;
+    let confidence = data.projectData.confidence;
+    let irony = data.projectData.irony;
+
+    li1.innerHTML = agreement;
+    li2.innerHTML = confidence;
+    li3.innerHTML = irony;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+button.addEventListener("click", () => {
   handleSubmit();
-})
-
-
+  submitForm();
+});
 
 function handleSubmit() {
-  
   // check what text was put into the form field
-  let formText = document.getElementById('name').value
-  
-  checkForName(formText)
-  
-  console.log("::: Form Submitted :::")
-  
-}
+  let formText = document.getElementById("name").value;
 
+  checkForName(formText);
+
+  console.log("::: Form Submitted :::");
+}
 
 function checkForName(inputText) {
   console.log("::: Running checkForName :::", inputText);
-  let names = [
-    "Picard",
-    "Janeway",
-    "Kirk",
-    "Archer",
-    "Georgiou"
-  ]
-  
-  if(names.includes(inputText)) {
-    alert("Welcome, Captain!")
+  let names = ["Picard", "Janeway", "Kirk", "Archer", "Georgiou"];
+
+  if (names.includes(inputText)) {
+    alert("Welcome, Captain!");
   }
 }
 
-
-
+export { cloudData };
+export { postData } ;
+export { updateData };

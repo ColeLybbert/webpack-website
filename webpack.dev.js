@@ -1,4 +1,4 @@
-const webpack = require('webpack')
+const webpack = require("webpack");
 
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
@@ -6,18 +6,18 @@ const { plugins } = require("@babel/preset-env/lib/plugins-compat-data");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
-const Dotenv = require('dotenv-webpack');
-const WorkboxPlugin = require('workbox-webpack-plugin');
+const Dotenv = require("dotenv-webpack");
+const WorkboxPlugin = require("workbox-webpack-plugin");
 
 module.exports = {
   mode: "development",
   entry: path.resolve(__dirname, "src/index.js"),
-  devtool: 'source-map',
-  stats: 'verbose',
+  devtool: "source-map",
+  stats: "verbose",
   output: {
     libraryTarget: "var",
     library: "Client",
-    filename: 'bundle.js',
+    filename: "bundle.js",
   },
   optimization: {
     minimizer: [new TerserPlugin({}), new OptimizeCSSAssetsPlugin({})],
@@ -33,12 +33,23 @@ module.exports = {
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
+          options: {
+            presets: [["env", { modules: false }]],
+
+            plugins: ["syntax-dynamic-import"],
+
+            env: {
+              test: {
+                plugins: ["dynamic-import-node"],
+              },
+            },
+          },
         },
       },
     ],
   },
   devServer: {
-    static: './dist',
+    static: "./dist",
   },
   plugins: [
     new Dotenv(),

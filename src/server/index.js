@@ -17,7 +17,7 @@ function listening() {
 }
 
 app.get('/lang', (req, res) => {
-    console.log('get request for data came in!Send the tracked object');
+    console.log(projectData);
     res.send(projectData);
 })
 //POST request comes in, this handles it
