@@ -1,3 +1,6 @@
+const apiKey = process.env.API_KEY;
+const baseURL = "https://api.meaningcloud.com/sentiment-2.1";
+
 const submitForm = async (formInput) => {
     //in cloud data we return an object with the data we want and assign it here to pass it to next
     //function below it waiting
@@ -32,7 +35,7 @@ const cloudData = async () => {
       projectData.agreement = apiData.agreement;
       projectData.confidence = apiData.confidence;
       projectData.irony = apiData.irony;
-      console.log(projectData);
+      console.log("hi");
       return projectData;
     } else {
       console.log("this code doesnt exist bro");
@@ -61,4 +64,4 @@ const updateData = async () => {
   }
 };
 
-export default submitForm;
+export { submitForm };
