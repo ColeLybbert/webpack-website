@@ -1,3 +1,4 @@
+let formInput = formInput.value;
 const apiKey = process.env.API_KEY;
 const baseURL = "https://api.meaningcloud.com/sentiment-2.1";
 
@@ -12,12 +13,11 @@ const submitForm = async (formInput) => {
 };
 const cloudData = async () => {
   try {
-    let formInputValue = formInput.value;
 
     // Parameters for the fetch request
     const formdata = new FormData();
     formdata.append("key", apiKey);
-    formdata.append("txt", formInputValue);
+    formdata.append("txt", formInput);
     formdata.append("lang", "en");
 
     // The fetch request
