@@ -1,3 +1,4 @@
+//YOU CANNOT GET THE VALUE ON LOAD! IT HAS TO BE ON SUBMIT!!!!
 let formInput = formInput.value;
 const apiKey = process.env.API_KEY;
 const baseURL = "https://api.meaningcloud.com/sentiment-2.1";
