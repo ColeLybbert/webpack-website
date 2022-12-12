@@ -50,7 +50,7 @@ module.exports = {
 
   plugins: [
     new Dotenv(),
-    new webpack.HotModuleReplacementPlugin(),
+    // new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       title: "lang-website",
       filename: "index.html",
