@@ -47,9 +47,7 @@ module.exports = {
       },
     ],
   },
-  devServer: {
-    static: "./dist",
-  },
+
   plugins: [
     new Dotenv(),
     new webpack.HotModuleReplacementPlugin(),
