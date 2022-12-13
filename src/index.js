@@ -4,8 +4,6 @@ import "./styles/form.scss";
 import "./styles/header.scss";
 
 import { cloudData } from "./js/cloud";
-import { postData } from "./js/post";
-import { updateData } from "./js/update";
 
 let button = document.getElementById("submitBtn");
 

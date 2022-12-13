@@ -1,38 +1,28 @@
 const apiKey = process.env.API_KEY;
 const baseURL = "https://api.meaningcloud.com/sentiment-2.1";
 
-const cloudData = async (formInput, apiData) => {
+export const cloudData = async (formInput) => {
     try {
       // Parameters for the fetch request
-      const formdata = new FormData();
-      formdata.append("key", apiKey);
-      formdata.append("txt", formInput);
-      formdata.append("lang", "en");
-  
+      let newForm = createForm(formInput);
+
       // The fetch request
       const res = await fetch(baseURL, {
         method: "POST",
-        body: formdata,
+        body: newForm,
         redirect: "follow",
       });
-  
-      // Messing with data
-      const data = await res.json();
-      apiData = data;
-      let projectData = {};
-      if (apiData) {
-        projectData.agreement = apiData.agreement;
-        projectData.confidence = apiData.confidence;
-        projectData.irony = apiData.irony;
-        console.log("CloudData fetched:")
-        console.log(projectData);
-        return projectData;
-      } else {
-        console.log("this code doesnt exist bro");
-      }
-    } catch (err) {
-      return `Failed ${err}`;
-    }
-  };
 
-export { cloudData };
+      const data = await res.json();
+      return data;
+    } catch (err) {
+      return `API call Failed: ${err}`;
+  }
+};
+export let createForm = async(formInput)=>{
+  const formdata = new FormData();
+  formdata.append("key", apiKey||666);
+  formdata.append("txt", formInput);
+  formdata.append("lang", "en");
+  return formdata;
+}
