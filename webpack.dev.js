@@ -39,7 +39,7 @@ module.exports = {
 
             env: {
               test: {
-                plugins: ["dynamic-import-node"],
+                plugins: ["@babel/plugin-transform-modules-commonjs"],
               },
             },
           },
@@ -47,7 +47,10 @@ module.exports = {
       },
     ],
   },
-
+  devServer: {
+    static: './dist',
+    hot: true,
+  },
   plugins: [
     new Dotenv(),
     new webpack.HotModuleReplacementPlugin(),

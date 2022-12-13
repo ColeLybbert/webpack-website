@@ -3,14 +3,26 @@ import "./styles/footer.scss";
 import "./styles/form.scss";
 import "./styles/header.scss";
 
-import { submitForm } from "./js/submitForm";
+import { cloudData } from "./js/cloud";
+import { postData } from "./js/post";
+import { updateData } from "./js/update";
 
 let button = document.getElementById("submitBtn");
-let formInput = document.getElementById("name");
+
+const submitForm = async () => {
+  let formInput = document.getElementById("name").value;
+  //in cloud data we return an object with the data we want and assign it here to pass it to next
+  //function below it waiting
+  let apiData = await cloudData(formInput);
+
+  await postData(apiData);
+
+  updateData(apiData)
+};
 
 button.addEventListener("click", () => {
   nameHandle();
-  submitForm(formInput.value);
+  submitForm();
 });
 function nameHandle() {
   // check what text was put into the form field

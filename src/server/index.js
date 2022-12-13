@@ -17,12 +17,12 @@ function listening() {
 }
 
 app.get('/lang', (req, res) => {
-    console.log(projectData);
-    res.send(projectData);
+    console.log("yo");
+    res.send(apiData);
 })
 //POST request comes in, this handles it
 app.post('/lang', (req, res) => {
-    projectData = req.body;
+    apiData = req.body;
 })
 
 
