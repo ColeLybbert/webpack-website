@@ -31,5 +31,5 @@ test('If the txt field is correct', async() =>{
 })
 test('If the lang field is correct', async() =>{
     const formdata = await createForm(formInput);
-
+    expect(formdata.has('lang')).toBe(true)
 })
