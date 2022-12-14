@@ -21,7 +21,7 @@ export const cloudData = async (formInput) => {
 };
 export let createForm = async(formInput)=>{
   const formdata = new FormData();
-  formdata.append("key", apiKey||666);
+  formdata.append("key", apiKey);
   formdata.append("txt", formInput);
   formdata.append("lang", "en");
   return formdata;
