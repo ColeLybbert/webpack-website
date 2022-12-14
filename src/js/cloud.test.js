@@ -4,7 +4,7 @@
 
 const {createForm} = require('./cloud')
 const formInput = "Kirk";
-test('If Data Gets Fetched with CloudData', async () => {
+test('If the form gets created', async () => {
     const formdata = await createForm(formInput);
     expect(formdata).toBeDefined();
     
