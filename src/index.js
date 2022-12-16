@@ -11,11 +11,7 @@ const submitForm = async () => {
   let formInput = document.getElementById("name").value;
   //in cloud data we return an object with the data we want and assign it here to pass it to next
   //function below it waiting
-  let apiData = await cloudData(formInput);
-
-  await postData(apiData);
-
-  updateData(apiData)
+  await cloudData(formInput);
 };
 
 button.addEventListener("click", () => {

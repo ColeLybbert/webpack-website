@@ -3,17 +3,16 @@ const baseURL = "https://api.meaningcloud.com/sentiment-2.1";
 
 export const cloudData = async (formInput) => {
     try {
-      // Parameters for the fetch request
       let newForm = createForm(formInput);
 
       // The fetch request
       const res = await fetch(baseURL, {
         method: "POST",
-        body: newForm,
+        body: formdata,
         redirect: "follow",
       });
-
       const data = await res.json();
+      console.log(data);
       return data;
     } catch (err) {
       return `API call Failed: ${err}`;
