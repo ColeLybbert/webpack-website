@@ -3,12 +3,13 @@ const baseURL = "https://api.meaningcloud.com/sentiment-2.1";
 
 export const cloudData = async (formInput) => {
     try {
-      let newForm = createForm(formInput);
+      let newForm = await createForm(formInput);
+      console.log(newForm)
 
       // The fetch request
       const res = await fetch(baseURL, {
         method: "POST",
-        body: formdata,
+        body: newForm,
         redirect: "follow",
       });
       const data = await res.json();
@@ -20,7 +21,7 @@ export const cloudData = async (formInput) => {
 };
 export let createForm = async(formInput)=>{
   const formdata = new FormData();
-  formdata.append("key", apiKey);
+  formdata.append("key", `${apiKey}`);
   formdata.append("txt", formInput);
   formdata.append("lang", "en");
   return formdata;

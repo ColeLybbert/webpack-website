@@ -2,6 +2,21 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background-color: rgb(13, 1, 23);
+  color:white;
+
+}
+input{
+  background-color: rgb(3, 53, 3);
+}
+textarea:focus, input:focus {
+  color: #ff0000;
+}
+
+button{
+  background: red;
+  color:rgb(158, 67, 82);
+  font-weight: bold;
 }
 
 main {
