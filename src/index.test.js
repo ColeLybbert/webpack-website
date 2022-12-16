@@ -8,8 +8,12 @@ const {nameHandle} = require('./index')
 //we create one, add the id the function is looking for
 //and append it to the document.body of the fake browser JEST 
 //makes to test dom manipulation.
+
+//create mock user input (because no HTML) in jsdom mock test env
 let formText = document.createElement('input');
+//add the ID that nameHandle() looks for (go look in index.js file line 21)
 formText.id = 'name';
+//append this mock user input to the mock DOM so nameHandle() doesnt get undefined
 document.body.appendChild(formText);
 
 
