@@ -12,9 +12,9 @@ export const cloudData = async (formInput) => {
         body: newForm,
         redirect: "follow",
       });
-      const data = await res.json();
-      console.log(data);
-      return data;
+      const apiData = await res.json();
+      console.log(apiData);
+      return apiData;
     } catch (err) {
       return `API call Failed: ${err}`;
   }
